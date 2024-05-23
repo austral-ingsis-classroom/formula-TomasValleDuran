@@ -6,6 +6,10 @@ import static org.hamcrest.Matchers.empty;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+
+import edu.austral.ingsis.math.functions.*;
+import edu.austral.ingsis.math.functions.Module;
 import org.junit.Test;
 
 public class ListVariablesTest {
@@ -13,7 +17,11 @@ public class ListVariablesTest {
   /** Case 1 + 6 */
   @Test
   public void shouldListVariablesFunction1() {
-    final List<String> result = Collections.emptyList();
+    Function function = new Sum(List.of(
+            new Number(1),
+            new Number(6)
+    ));
+    Set<String> result = function.listVariables();
 
     assertThat(result, empty());
   }
@@ -21,7 +29,8 @@ public class ListVariablesTest {
   /** Case 12 / div */
   @Test
   public void shouldListVariablesFunction2() {
-    final List<String> result = Collections.emptyList();
+    Function function = new Division(new Number(12), new Variable("div"));
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("div"));
   }
@@ -29,7 +38,11 @@ public class ListVariablesTest {
   /** Case (9 / x) * y */
   @Test
   public void shouldListVariablesFunction3() {
-    final List<String> result = Collections.emptyList();
+    Function function = new Product(List.of(
+            new Division(new Number(9), new Variable("x")),
+            new Variable("y")
+    ));
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("x", "y"));
   }
@@ -37,7 +50,9 @@ public class ListVariablesTest {
   /** Case (27 / a) ^ b */
   @Test
   public void shouldListVariablesFunction4() {
-    final List<String> result = Collections.emptyList();
+    Function division = new Division(new Number(27), new Variable("a"));
+    Function function = new Power(division, new Variable("b"));
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("a", "b"));
   }
@@ -45,7 +60,9 @@ public class ListVariablesTest {
   /** Case z ^ (1/2) */
   @Test
   public void shouldListVariablesFunction5() {
-    final List<String> result = Collections.emptyList();
+    Function division = new Division(new Number(1), new Number(2));
+    Function function = new Power(new Variable("z"), division);
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("z"));
   }
@@ -53,7 +70,12 @@ public class ListVariablesTest {
   /** Case |value| - 8 */
   @Test
   public void shouldListVariablesFunction6() {
-    final List<String> result = Collections.emptyList();
+    Function module = new Module(new Variable("value"));
+    Function function = new Difference(List.of(
+            module,
+            new Number(8)
+    ));
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("value"));
   }
@@ -61,7 +83,12 @@ public class ListVariablesTest {
   /** Case |value| - 8 */
   @Test
   public void shouldListVariablesFunction7() {
-    final List<String> result = Collections.emptyList();
+    Function module = new Module(new Variable("value"));
+    Function function = new Difference(List.of(
+            module,
+            new Number(8)
+    ));
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("value"));
   }
@@ -69,7 +96,15 @@ public class ListVariablesTest {
   /** Case (5 - i) * 8 */
   @Test
   public void shouldListVariablesFunction8() {
-    final List<String> result = Collections.emptyList();
+    Function difference = new Difference(List.of(
+            new Number(5),
+            new Variable("i")
+    ));
+    Function function = new Product(List.of(
+            difference,
+            new Number(8)
+    ));
+    final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("i"));
   }
