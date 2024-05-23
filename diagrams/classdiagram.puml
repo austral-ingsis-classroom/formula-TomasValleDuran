@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Function {
+    + evaluate(Map<String, Double> values): double
+    + print() : String
+    + listVariables() : List<String>
+}
+
+class Number implements Function {
+    - value: double
+    + evaluate(Map<String, Double> values): double
+    + print() : String
+    + listVariables() : List<String>
+}
+
+class Variable implements Function {
+    - name: String
+    + evaluate(Map<String, Double> values): double
+    + print() : String
+    + listVariables() : List<String>
+}
+
+
+@enduml
