@@ -1,16 +1,14 @@
 package edu.austral.ingsis.math;
 
-import org.junit.jupiter.api.Test;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import edu.austral.ingsis.math.functions.*;
 import edu.austral.ingsis.math.functions.Module;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class ResolutionWithVariablesTest {
 
@@ -39,7 +37,9 @@ public class ResolutionWithVariablesTest {
   /** Case (9 / x) * y where x = 3 and y = 4 */
   @Test
   public void shouldResolveFunction3() {
-    Function product = new Product(Arrays.asList(new Division(new Number(9), new Variable("x")), new Variable("y")));
+    Function product =
+        new Product(
+            Arrays.asList(new Division(new Number(9), new Variable("x")), new Variable("y")));
     Map<String, Double> variables = new HashMap<>();
     variables.put("x", 3.0);
     variables.put("y", 4.0);
@@ -74,9 +74,8 @@ public class ResolutionWithVariablesTest {
   /** Case |value| - 8 where value = 8 */
   @Test
   public void shouldResolveFunction6() {
-    Function difference = new Difference(Arrays.asList(
-            new Module(new Variable("value")),
-            new Number(8)));
+    Function difference =
+        new Difference(Arrays.asList(new Module(new Variable("value")), new Number(8)));
     Map<String, Double> variables = new HashMap<>();
     variables.put("value", 8.0);
     Double result = difference.evaluate(variables);
@@ -87,9 +86,8 @@ public class ResolutionWithVariablesTest {
   /** Case |value| - 8 where value = 8 */
   @Test
   public void shouldResolveFunction7() {
-    Function difference = new Difference(Arrays.asList(
-            new Module(new Variable("value")),
-            new Number(8)));
+    Function difference =
+        new Difference(Arrays.asList(new Module(new Variable("value")), new Number(8)));
     Map<String, Double> variables = new HashMap<>();
     variables.put("value", 8.0);
     Double result = difference.evaluate(variables);
@@ -100,7 +98,10 @@ public class ResolutionWithVariablesTest {
   /** Case (5 - i) * 8 where i = 2 */
   @Test
   public void shouldResolveFunction8() {
-    Function product = new Product(Arrays.asList(new Difference(Arrays.asList(new Number(5), new Variable("i"))), new Number(8)));
+    Function product =
+        new Product(
+            Arrays.asList(
+                new Difference(Arrays.asList(new Number(5), new Variable("i"))), new Number(8)));
     Map<String, Double> variables = new HashMap<>();
     variables.put("i", 2.0);
     Double result = product.evaluate(variables);

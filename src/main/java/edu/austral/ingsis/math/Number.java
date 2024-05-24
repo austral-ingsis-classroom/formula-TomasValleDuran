@@ -1,28 +1,32 @@
 package edu.austral.ingsis.math;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 public class Number implements Function {
-    private final double value;
+  private final double value;
 
-    public Number(double value) {
-        this.value = value;
-    }
+  public Number(double value) {
+    this.value = value;
+  }
 
-    @Override
-    public double evaluate(Map<String, Double> variables) {
-        return value;
-    }
+  @Override
+  public double evaluate(Map<String, Double> variables) {
+    return value;
+  }
 
-    @Override
-    public String print() {
-        return Double.toString(value);
+  @Override
+  public String print() {
+    if (value % 1 == 0) {
+      return Integer.toString((int) value);
+    } else {
+      return Double.toString(value);
     }
+  }
 
-    @Override
-    public Set<String> listVariables() {
-        return new HashSet<>();
-    }
+  @Override
+  public Set<String> listVariables() {
+    return new HashSet<>();
+  }
 }

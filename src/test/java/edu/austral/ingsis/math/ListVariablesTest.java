@@ -1,26 +1,21 @@
 package edu.austral.ingsis.math;
 
-import org.junit.jupiter.api.Test;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 
-import java.util.List;
-import java.util.Set;
-
 import edu.austral.ingsis.math.functions.*;
 import edu.austral.ingsis.math.functions.Module;
+import java.util.List;
+import java.util.Set;
+import org.junit.jupiter.api.Test;
 
 public class ListVariablesTest {
 
   /** Case 1 + 6 */
   @Test
   public void shouldListVariablesFunction1() {
-    Function function = new Sum(List.of(
-            new Number(1),
-            new Number(6)
-    ));
+    Function function = new Sum(List.of(new Number(1), new Number(6)));
     Set<String> result = function.listVariables();
 
     assertThat(result, empty());
@@ -38,10 +33,8 @@ public class ListVariablesTest {
   /** Case (9 / x) * y */
   @Test
   public void shouldListVariablesFunction3() {
-    Function function = new Product(List.of(
-            new Division(new Number(9), new Variable("x")),
-            new Variable("y")
-    ));
+    Function function =
+        new Product(List.of(new Division(new Number(9), new Variable("x")), new Variable("y")));
     final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("x", "y"));
@@ -71,10 +64,7 @@ public class ListVariablesTest {
   @Test
   public void shouldListVariablesFunction6() {
     Function module = new Module(new Variable("value"));
-    Function function = new Difference(List.of(
-            module,
-            new Number(8)
-    ));
+    Function function = new Difference(List.of(module, new Number(8)));
     final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("value"));
@@ -84,10 +74,7 @@ public class ListVariablesTest {
   @Test
   public void shouldListVariablesFunction7() {
     Function module = new Module(new Variable("value"));
-    Function function = new Difference(List.of(
-            module,
-            new Number(8)
-    ));
+    Function function = new Difference(List.of(module, new Number(8)));
     final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("value"));
@@ -96,14 +83,8 @@ public class ListVariablesTest {
   /** Case (5 - i) * 8 */
   @Test
   public void shouldListVariablesFunction8() {
-    Function difference = new Difference(List.of(
-            new Number(5),
-            new Variable("i")
-    ));
-    Function function = new Product(List.of(
-            difference,
-            new Number(8)
-    ));
+    Function difference = new Difference(List.of(new Number(5), new Variable("i")));
+    Function function = new Product(List.of(difference, new Number(8)));
     final Set<String> result = function.listVariables();
 
     assertThat(result, containsInAnyOrder("i"));

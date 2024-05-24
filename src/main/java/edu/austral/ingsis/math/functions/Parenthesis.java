@@ -4,25 +4,25 @@ import edu.austral.ingsis.math.Function;
 import java.util.Map;
 import java.util.Set;
 
-public class Module implements Function {
-  private final Function base;
+public class Parenthesis implements Function {
+  private final Function function;
 
-  public Module(Function base) {
-    this.base = base;
+  public Parenthesis(Function function) {
+    this.function = function;
   }
 
   @Override
   public double evaluate(Map<String, Double> variables) {
-    return Math.abs(base.evaluate(variables));
+    return function.evaluate(variables);
   }
 
   @Override
   public String print() {
-    return "|" + base.print() + "|";
+    return "(" + function.print() + ")";
   }
 
   @Override
   public Set<String> listVariables() {
-    return base.listVariables();
+    return function.listVariables();
   }
 }

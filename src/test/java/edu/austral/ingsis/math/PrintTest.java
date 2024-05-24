@@ -1,16 +1,12 @@
 package edu.austral.ingsis.math;
 
-import org.junit.jupiter.api.Test;
-
-
-import edu.austral.ingsis.math.functions.*;
-import edu.austral.ingsis.math.functions.Module;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
+import edu.austral.ingsis.math.functions.*;
+import edu.austral.ingsis.math.functions.Module;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 public class PrintTest {
 
@@ -18,10 +14,7 @@ public class PrintTest {
   @Test
   public void shouldPrintFunction1() {
     final String expected = "1 + 6";
-    Function function = new Sum(List.of(
-            new Number(1),
-            new Number(6)
-    ));
+    Function function = new Sum(List.of(new Number(1), new Number(6)));
     final String result = function.print();
 
     assertThat(result, equalTo(expected));
@@ -41,10 +34,9 @@ public class PrintTest {
   @Test
   public void shouldPrintFunction3() {
     final String expected = "(9 / 2) * 3";
-    Function function = new Product(List.of(
-            new Division(new Number(9), new Number(2)),
-            new Number(3)
-    ));
+    Function division = new Division(new Number(9), new Number(2));
+    Function par = new Parenthesis(division);
+    Function function = new Product(List.of(par, new Number(3)));
     final String result = function.print();
 
     assertThat(result, equalTo(expected));
@@ -55,7 +47,8 @@ public class PrintTest {
   public void shouldPrintFunction4() {
     final String expected = "(27 / 6) ^ 2";
     Function division = new Division(new Number(27), new Number(6));
-    Function function = new Power(division, new Number(2));
+    Function par = new Parenthesis(division);
+    Function function = new Power(par, new Number(2));
     final String result = function.print();
 
     assertThat(result, equalTo(expected));
@@ -66,10 +59,7 @@ public class PrintTest {
   public void shouldPrintFunction6() {
     final String expected = "|value| - 8";
     Function module = new Module(new Variable("value"));
-    Function function = new Difference(List.of(
-            module,
-            new Number(8)
-    ));
+    Function function = new Difference(List.of(module, new Number(8)));
     final String result = function.print();
 
     assertThat(result, equalTo(expected));
@@ -80,10 +70,7 @@ public class PrintTest {
   public void shouldPrintFunction7() {
     final String expected = "|value| - 8";
     Function module = new Module(new Variable("value"));
-    Function function = new Difference(List.of(
-            module,
-            new Number(8)
-    ));
+    Function function = new Difference(List.of(module, new Number(8)));
     final String result = function.print();
 
     assertThat(result, equalTo(expected));
@@ -93,14 +80,9 @@ public class PrintTest {
   @Test
   public void shouldPrintFunction8() {
     final String expected = "(5 - i) * 8";
-    Function difference = new Difference(List.of(
-            new Number(5),
-            new Variable("i")
-    ));
-    Function function = new Product(List.of(
-            difference,
-            new Number(8)
-    ));
+    Function difference = new Difference(List.of(new Number(5), new Variable("i")));
+    Function par = new Parenthesis(difference);
+    Function function = new Product(List.of(par, new Number(8)));
     final String result = function.print();
 
     assertThat(result, equalTo(expected));
