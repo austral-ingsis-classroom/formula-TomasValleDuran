@@ -1,16 +1,16 @@
 package edu.austral.ingsis.math;
 
+import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import edu.austral.ingsis.math.functions.*;
 import edu.austral.ingsis.math.functions.Module;
-import org.junit.Test;
 
 public class ListVariablesTest {
 
