@@ -9,17 +9,53 @@ interface Function {
 
 class Number implements Function {
     - value: double
-    + evaluate(Map<String, Double> values): double
-    + print() : String
-    + listVariables() : List<String>
 }
 
 class Variable implements Function {
     - name: String
-    + evaluate(Map<String, Double> values): double
-    + print() : String
-    + listVariables() : List<String>
 }
 
+class Sum implements Function {
+    - functions: List<Function>
+}
+
+class Difference implements Function {
+    - functions: List<Function>
+}
+
+class Product implements Function {
+    - functions: List<Function>
+}
+
+class Division implements Function {
+    - dividend: Function
+    - divisor: Function
+}
+
+class Power implements Function {
+    - base: Function
+    - exponent: Function
+}
+
+class Root implements Function {
+    - base: Function
+}
+
+class Module implements Function {
+    - function: Function
+}
+
+class Parenthesis implements Function {
+    - function: Function
+}
+
+Sum o--- Function
+Difference o--- Function
+Product o--- Function
+Division o--- Function
+Power o--- Function
+Root o--- Function
+Module o--- Function
+Parenthesis o--- Function
 
 @enduml
